@@ -28,6 +28,7 @@ CFLAGS  += -I$(AM_HOME)/am/src/nemu/include -I$(AM_HOME)/am/src/xs/include -DISA
 ASFLAGS += -DMAINARGS=\"$(mainargs)\"
 .PHONY: $(AM_HOME)/am/src/nemu/common/mainargs.S
 
+# LDFLAGS += -T $(AM_HOME)/am/src/nemu/isa/riscv/boot/linker.ld
 LDFLAGS += -L $(AM_HOME)/am/src/nemu/ldscript
 LDFLAGS += -T $(AM_HOME)/am/src/nemu/isa/riscv/boot/loader64.ld
 

@@ -1,7 +1,7 @@
 ENTRY(_start)
 
 SECTIONS {
-  . = ORIGIN(ram);
+  . = 0x80000000;
   .text.init : { *(.text.init) }
   . = ALIGN(0x1000);
   .text : {
@@ -32,6 +32,4 @@ SECTIONS {
   end = .;
   _end = .;
   _heap_start = ALIGN(0x1000);
-  _pmem_start = pmem_base;
-  _pmem_end = _pmem_start + LENGTH(ram);
 }

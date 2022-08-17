@@ -2,15 +2,19 @@ ENTRY(_start)
 
 SECTIONS {
   . = 0x80000000;
+  .text.init : { *(.text.init) }
+  . = ALIGN(0x1000);
   .text : {
     *(entry)
-    *(.text*)
+    *(.text)
   }
+  . = ALIGN(0x1000);
   etext = .;
   _etext = .;
   .rodata : {
     *(.rodata*)
   }
+  . = ALIGN(0x1000);
   .htif : {
     PROVIDE(__htif_base = . );
     *(.htif)
