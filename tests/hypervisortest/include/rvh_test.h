@@ -20,7 +20,7 @@
 #define STR(x) STR_HELPER(x)
 
 #ifndef LOG_LEVEL
-#define LOG_LEVEL   LOG_DEBUG
+#define LOG_LEVEL   LOG_DETAIL
 #endif
 
 #define CDFLT  "\x1B[0m"
@@ -44,11 +44,29 @@
 # define ERROR(str...)	{\
     printf(CRED "ERROR: " CDFLT str );\
     printf(" (%s, %d)\n", __func__, __LINE__);\
-    exit(0);\
+    exit(-1);\
     while(1);\
 }
 #else
 # define ERROR(...) { exit(-1); while(1); }
+#endif
+
+#if LOG_LEVEL >= LOG_INFO
+# define INFO(str...)	{ printf(str); printf("\n"); }
+#else
+# define INFO(...)
+#endif
+
+#if LOG_LEVEL >= LOG_DETAIL
+# define DETAIL(str...)	{ printf(str); printf("\n"); }
+#else
+# define DETAIL(...)
+#endif
+
+#if LOG_LEVEL >= LOG_WARNING
+# define WARN(str...)	{ printf(CYEL "WARNING: " CDFLT str); printf("\n"); }
+#else
+# define WARN(...)
 #endif
 
 #if LOG_LEVEL >= LOG_VERBOSE
@@ -115,7 +133,7 @@ extern struct exception {
     excpt.testing = true;\
     excpt.triggered = false;\
     excpt.fault_inst = 0;\
-    DEBUG("setting up exception test");\
+    INFO("setting up exception test");\
 }
 
 #define TEST_EXEC_EXCEPT(addr) {\
@@ -131,7 +149,7 @@ extern struct exception {
 #define TEST_END(test) {\
 failed:\
     if(LOG_LEVEL >= LOG_INFO){\
-         printf("[TEST END]: %s\n" CDFLT, (test_status) ? CGRN "PASSED" : CRED "FAILED");\
+         printf(CBLU "[TEST END]: %s\n" CDFLT, (test_status) ? CGRN "PASSED" : CRED "FAILED");\
     }\
     goto_priv(PRIV_M);\
     reset_state();\

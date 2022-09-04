@@ -49,11 +49,11 @@ bool two_stage_translation() {
     check2 = read64(vaddr2) == 0x22;   
     TEST_ASSERT("vs gets right values after changing 1st stage pt", check1 && check2);
 
-    goto_priv(PRIV_M); 
+    goto_priv(PRIV_M);
     CSRS(medeleg, 1ull << CAUSE_LGPF);
     goto_priv(PRIV_VS);
     TEST_SETUP_EXCEPT();
-    read64(vs_page_base(VSRWX_GI));    
+    read64(vs_page_base(VSRWX_GI));
     TEST_ASSERT(
         "load guest page fault on unmapped address", 
         excpt.triggered == true && 

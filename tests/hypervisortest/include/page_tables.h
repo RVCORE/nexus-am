@@ -30,7 +30,7 @@
 
 /* ------------------------------------------------------------- */
 extern uint64_t pmem_base;
-#define MEM_BASE (0x80000000)
+#define MEM_BASE ((uintptr_t)&pmem_base)
 #define MEM_SIZE (0x10000000)
 #define TEST_PPAGE_BASE (MEM_BASE+(MEM_SIZE/2))
 #define TEST_VPAGE_BASE (0x100000000)

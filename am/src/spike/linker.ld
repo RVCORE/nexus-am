@@ -1,8 +1,9 @@
+pmem_base = 0x80000000;
+
 ENTRY(_start)
 
 SECTIONS {
   . = 0x80000000;
-  pmem_base = .;
   .text.init : { *(.text.init) }
   . = ALIGN(0x1000);
   .text : {

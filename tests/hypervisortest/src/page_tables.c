@@ -316,10 +316,10 @@ void hpt_init(){
     }
 }
 
-void vspt_switch(){
-    pte_t temp = vspt[3][SWITCH1];
-    vspt[3][SWITCH1] = vspt[3][SWITCH2];
-    vspt[3][SWITCH2] = temp;
+void vspt_switch() {
+  pte_t temp = vspt[3][SWITCH1];
+  vspt[3][SWITCH1] = vspt[3][SWITCH2];
+  vspt[3][SWITCH2] = temp;
 }
 
 void hpt_switch() {

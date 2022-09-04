@@ -254,10 +254,10 @@ uint64_t hshandler(){
     DEBUG("gva = 0x%lx", (CSRR(CSR_HSTATUS) >> HSTATUS_GVA_OFF) & 0x1);
 
     if(is_ecall(cause) && ecall_args[0] == ECALL_GOTO_PRIV){
-        goto_priv(ecall_args[1]); 
+        goto_priv(ecall_args[1]);
     } else if(is_ecall(cause)) {
-        ERROR("unknown ecall"); 
-    } else if(!excpt.testing){
+        ERROR("unknown ecall");
+    } else if(!excpt.testing) {
         ERROR("untested exception!");
     }
     
